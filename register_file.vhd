@@ -25,6 +25,7 @@ architecture behavioral of register_file is
             begin
                 if CLK'event and CLK = '1' then
                     case RD is
+			when "00000" =>r(0)  <= WRDATA;
                         when "00001" =>r(1)  <= WRDATA;
                         when "00010" =>r(2)  <= WRDATA;
                         when "00011" =>r(3)  <= WRDATA;
@@ -51,6 +52,9 @@ architecture behavioral of register_file is
                         when "11000" =>r(24) <= WRDATA;
                         when "11001" =>r(25) <= WRDATA;
                         when "11010" =>r(26) <= WRDATA;
+			when "11011" =>r(27) <= WRDATA;
+			when "11100" =>r(28) <= WRDATA;
+			when "11101" =>r(29) <= WRDATA;
                         when "11110" =>r(30) <= WRDATA;
                         when "11111" =>r(31) <= WRDATA;
                         when others => null;
@@ -60,6 +64,7 @@ architecture behavioral of register_file is
 
         readReg1 : process(CLK, RS)
             begin
+		if CLK'event and CLK = '1' then
                 case RS is
                     when "00000" =>RDATA1 <= r(0);
                     when "00001" =>RDATA1 <= r(1);
@@ -95,10 +100,12 @@ architecture behavioral of register_file is
                     when "11111" =>RDATA1 <= r(31);
                     when others => null;
                 end case;
+                end if;
         end process;
 
         readReg2 : process(CLK, RT)
             begin
+              if CLK'event and CLK = '1' then
                 case RT is
                     when "00000" =>RDATA2 <= r(0);
                     when "00001" =>RDATA2 <= r(1);
@@ -134,8 +141,6 @@ architecture behavioral of register_file is
                     when "11111" =>RDATA2 <= r(31);
                     when others => null;
                 end case;
+              end if;
         end process;
-
-        r(0) <= X"00000000";   -- zero register
-        r(29) <= X"000000FC";  -- stack pointer
 end behavioral;
