@@ -15,9 +15,11 @@ architecture behavioral of ALU is
         begin
 	    process(FUNCT)
 	        begin
-		    case(FUNCT) is
+		    case(FUNCT) is --funct values are based on MIPS function codes
                         when "100000" => ALU_RESULT<= std_logic_vector(unsigned(A)+unsigned(B));
                         when "100010" => ALU_RESULT<= std_logic_vector(unsigned(A)-unsigned(B));
+			when "100100" => ALU_RESULT<= A and B;
+			when "100101" => ALU_RESULT<= A or B; 
                         when others => ALU_RESULT<= std_logic_vector (unsigned (A) + unsigned (B));
                     end case;
                     if ALU_RESULT   = "00000000000000000000000000000000" then
