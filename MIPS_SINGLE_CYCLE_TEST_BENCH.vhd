@@ -23,13 +23,16 @@ architecture behavioral of MIPS_tb is
             s_instruction <="00000011001001110000000000100000"; --add
             s_clk         <='1';
             wait for 10 ns;
-            s_instruction <="00000011001110010100000000100000"; --add
+            s_instruction <="00000011001110010100000000100101"; --or
+            s_clk         <='1';
+            wait for 10 ns;
+            s_instruction <="00000011001001110000000000100000"; --add
             s_clk         <='1';
             wait for 10 ns;
             s_instruction <="00000011111000011010000000100010"; --sub
             s_clk         <='1';
             wait for 10 ns;
-            s_instruction <="00000000100010010100100000100000"; --add
+            s_instruction <="00000000100010010100100000100100"; --and
             s_clk         <='0';
             wait for 10 ns;
             s_instruction <="00000000101101001000000000100010"; --sub
